@@ -9,6 +9,7 @@ import Search from "./components/search";
 import List from "./components/list";
 import WelcomeDialog from "./components/welcomeDialog";
 
+//functional components
 function App() {
   const [flag, setFlag] = useState(false);
   const userObj = {
