@@ -4,7 +4,10 @@ import { useState } from "react";
 import Clock from "./components/clock";
 import LoginControl from "./components/loginControl";
 import Blog from "./components/blog";
-import Form from "./components/form"
+import Form from "./components/form";
+import Search from "./components/search";
+import List from "./components/list";
+import WelcomeDialog from "./components/welcomeDialog";
 
 function App() {
   const [flag, setFlag] = useState(false);
@@ -29,6 +32,21 @@ function App() {
       title: "Mongo",
       content: "Hello Mongo!",
     },
+    {
+      id: 4,
+      title: "Java",
+      content: "Hello Java!",
+    },
+    {
+      id: 5,
+      title: "Angular",
+      content: "Hello Angular!",
+    },
+    {
+      id: 6,
+      title: "Figma",
+      content: "Hello Figma!",
+    },
   ];
 
   function callUser(user) {
@@ -42,10 +60,17 @@ function App() {
       return <h2>Welcome X</h2>;
     }
   }
+  const [searchTerm, setSearchTerm] = useState("");
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+  const filterList = blogs.filter((items)=>{
+    return items.title.toLowerCase().includes(searchTerm);
+  })
 
   return (
     <>
-      {callUser(userObj)}
+      {/* {callUser(userObj)}
       {callUser()}
       <Test />
       <Test user={userObj} />
@@ -53,7 +78,10 @@ function App() {
       {flag ? <Clock /> : "No Clock Component"}
       <LoginControl />
       <Blog posts={blogs} />
-      <Form/>
+      <Form/> */}
+      {/* <Search searchTerm={searchTerm} handleSearch={handleSearch} />
+      <List list={filterList} /> */}
+      <WelcomeDialog/>
     </>
   );
 }
