@@ -8,8 +8,11 @@ import Form from "./components/form";
 import Search from "./components/search";
 import List from "./components/list";
 import WelcomeDialog from "./components/welcomeDialog";
+import EventHandling from "./components/EventHandling";
+import UseState from "./components/UseState";
 
 //functional components
+//this App "A" should be in capital
 function App() {
   const [flag, setFlag] = useState(false);
   const userObj = {
@@ -50,6 +53,7 @@ function App() {
     },
   ];
 
+  //conditional rendering
   function callUser(user) {
     if (user) {
       return (
@@ -61,30 +65,75 @@ function App() {
       return <h2>Welcome X</h2>;
     }
   }
+  //or
+  function callUser(user) {
+    let showData;
+    if (user) {
+      showData = (
+        <h1>
+          Welcome {user.firstName} {user.lastName} to My Page
+        </h1>
+      );
+    } else {
+      showData = <h2>Welcome X</h2>;
+    }
+    return showData;
+  }
+
+  function Rendering(user) {
+    return (
+      <>
+        {user ? (
+          <h1>
+            {" "}
+            Welcome {user.firstName} {user.lastName} to My Page
+          </h1>
+        ) : null}
+      </>
+    );
+  }
+
   const [searchTerm, setSearchTerm] = useState("");
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };
-  const filterList = blogs.filter((items)=>{
+  const filterList = blogs.filter((items) => {
     return items.title.toLowerCase().includes(searchTerm);
-  })
+  });
 
   return (
     <>
       {/* {callUser(userObj)}
       {callUser()}
       <Test />
-      <Test user={userObj} />
+      <Test user={userObj} /> or <Test {...userObj} />
       <button onClick={() => setFlag(!flag)}>Toggle Clock</button>
       {flag ? <Clock /> : "No Clock Component"}
       <LoginControl />
-      <Blog posts={blogs} />
       <Form/> */}
       {/* <Search searchTerm={searchTerm} handleSearch={handleSearch} />
       <List list={filterList} /> */}
-      <WelcomeDialog/>
+      {/* <WelcomeDialog /> */}
+      {/* <Rendering {...userObj} />
+      <Blog posts={blogs} /> */}
+      {/* <EventHandling
+        onClick={() => {
+          console.log("App se bhi Cliked");
+        }}
+        fname="mukul"
+        lname="raghav"
+        age="22"
+      >
+        <br />
+        <label>NAME</label>
+        <h1>MUkUL RAGHAV</h1>
+      </EventHandling> */}
+      <UseState/>
     </>
   );
 }
+
+// "OP TEST" above is called children
+//"onClick" will work as a prop function not an event handler
 
 export default App;

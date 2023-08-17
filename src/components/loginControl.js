@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+// event handlers
+
 function LoginControl() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const handleLoginClick = () => {
@@ -23,5 +25,10 @@ function LoginButton (props) {
 function LogoutButton (props) {
     return <button onClick={props.onClick}>LogOut</button>
 }
+<>
+    <LoginButton onClick={()=>{console.log("Hi")}} />
+    <LogoutButton onClick={console.log("Hi")} /> 
+    {/* above 2nd method is wrong as it will print console on code run*/}
+</>
 
 export default LoginControl;
