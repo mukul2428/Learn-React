@@ -10,6 +10,8 @@ import List from "./components/list";
 import WelcomeDialog from "./components/welcomeDialog";
 import EventHandling from "./components/EventHandling";
 import UseState from "./components/UseState";
+import Arrays from "./components/Arrays";
+import Forms from "./components/Forms";
 
 //functional components
 //this App "A" should be in capital
@@ -93,6 +95,7 @@ function App() {
     );
   }
 
+  // for filtering purpose
   const [searchTerm, setSearchTerm] = useState("");
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -100,6 +103,32 @@ function App() {
   const filterList = blogs.filter((items) => {
     return items.title.toLowerCase().includes(searchTerm);
   });
+
+  // for forms
+  const contactDetails = [
+    {
+      id: "1",
+      school: "MAX Public",
+      place: "Mathura",
+      fname: "Sumit",
+      lname: "OP",
+    },
+    {
+      id: "2",
+      school: "Delhi Public",
+      place: "Agra",
+      fname: "Miraz",
+      lname: "OP",
+    },
+  ];
+  const [contact, setContact] = useState(contactDetails);
+  function setStudentData(studentData) {
+    setContact([
+      ...contact,
+      { ...studentData, id: String(contact.length + 1) },
+    ]);
+    console.log(contact);
+  }
 
   return (
     <>
@@ -128,12 +157,24 @@ function App() {
         <label>NAME</label>
         <h1>MUkUL RAGHAV</h1>
       </EventHandling> */}
-      <UseState/>
+      {/* <UseState/> */}
+      {/* <Arrays blogs={blogs}></Arrays> */}
+      <Forms setStudentData={setStudentData}></Forms>
+      <h3>
+        <ul>
+          {contact.map((item) => (
+            <li>{JSON.stringify(item)}</li>
+          ))}
+        </ul>
+      </h3>
     </>
   );
 }
 
 // "OP TEST" above is called children
 //"onClick" will work as a prop function not an event handler
+
+// "setStudentData={setStudentData}" = passing function as a prop for uplifting state
+// so this is passing data from child to parent
 
 export default App;

@@ -11,7 +11,8 @@ function Clock() {
             console.log("cleanup of Interval");
             clearInterval(interval);
         };
-    }, [time]); // it will only when time changes
+    }, [time]); // it will only work when time changes
+    //[] = dependency array, so when-ever there will be change in time then useEffect will work
     
     function showDate() {
         //console.log(new Date().toString());
