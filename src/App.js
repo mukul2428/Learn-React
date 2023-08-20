@@ -2,7 +2,7 @@ import "./App.css";
 import Test from "./components/Test";
 import { useState } from "react";
 import Clock from "./components/clock";
-import LoginControl from "./components/loginControl";
+// import LoginControl from "./components/loginControl";
 import Blog from "./components/blog";
 import Form from "./components/form";
 import Search from "./components/search";
@@ -12,6 +12,7 @@ import EventHandling from "./components/EventHandling";
 import UseState from "./components/UseState";
 import Arrays from "./components/Arrays";
 import Forms from "./components/Forms";
+import ShowFormData from "./components/ShowFormData";
 
 //functional components
 //this App "A" should be in capital
@@ -122,16 +123,38 @@ function App() {
     },
   ];
   const [contact, setContact] = useState(contactDetails);
+
+  const [editContact, setEditContact] = useState(null);
+
   function setStudentData(studentData) {
     setContact([
       ...contact,
       { ...studentData, id: String(contact.length + 1) },
     ]);
-    console.log(contact);
+  }
+  function handleEdit(id) {
+    console.log(id);
+    //finding id of that particular card and setting it to forms
+    setEditContact(contact.find((data) => data.id === id));
+  }
+
+  function handleDelete(id) {
+    console.log(id);
+    setContact(contact.filter((data) => data.id !== id));
+  }
+  function updateStudentData(studentData) {
+    console.log(studentData);
+    //find index of data to be updated
+    const index = contact.findIndex((data)=> data.id === studentData.id);
+
+    const newContact = [...contact];
+    // splice = remove item from that particular index and put new item
+    newContact.splice(index, 1, studentData)
+    setContact(newContact);
   }
 
   return (
-    <>
+    <span className="app-container">
       {/* {callUser(userObj)}
       {callUser()}
       <Test />
@@ -159,15 +182,17 @@ function App() {
       </EventHandling> */}
       {/* <UseState/> */}
       {/* <Arrays blogs={blogs}></Arrays> */}
-      <Forms setStudentData={setStudentData}></Forms>
-      <h3>
-        <ul>
-          {contact.map((item) => (
-            <li>{JSON.stringify(item)}</li>
-          ))}
-        </ul>
-      </h3>
-    </>
+      <Forms
+        setStudentData={setStudentData}
+        editContact={editContact}
+        updateStudentData={updateStudentData}
+      ></Forms>
+      <ShowFormData
+        contact={contact}
+        handleEdit={handleEdit}
+        handleDelete={handleDelete}
+      ></ShowFormData>
+    </span>
   );
 }
 

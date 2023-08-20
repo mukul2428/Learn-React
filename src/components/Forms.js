@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import "./Forms.css";
 
-function Forms({setStudentData}) {
+function Forms({ setStudentData, editContact, updateStudentData }) {
   const initialState = {
     school: "XYZ Public",
     place: "Delhi",
@@ -12,15 +13,28 @@ function Forms({setStudentData}) {
     setContact({ ...contact, [e.target.name]: e.target.value });
     // this a way to add elements in an object
   }
-  function handleSubmit(e){
+  function handleSubmit(e) {
     e.stopPropagation(); // restrict other components re-rendering
     e.preventDefault(); // restrict its default behaviour
-    setStudentData(contact);
+    if(editContact){
+      updateStudentData(contact);
+    }else{
+      setStudentData(contact);
+    }
   }
+  //used for edit
+  useEffect(() => {
+    if (editContact) {
+      setContact(editContact);
+    }
+  }, [editContact]);
+
+  //if there is any change in editContact then useeEffect will work
+
   return (
-    <>
-    {/* controlled forms due to this - "name={contact.fname}"*/}
-      <form>
+    <div className="form-container">
+      {/* controlled forms due to this - "name={contact.fname}"*/}
+      <form className="form-container">
         <input
           type="text"
           name="fname"
@@ -36,8 +50,10 @@ function Forms({setStudentData}) {
           onChange={handleClick}
         />
       </form>
-      <button onClick={handleSubmit}>Submit</button>
-    </>
+      <button onClick={handleSubmit}>
+        {editContact ? "Update" : "+ Add"}
+      </button>
+    </div>
   );
 }
 export default Forms;

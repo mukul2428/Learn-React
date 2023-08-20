@@ -1,19 +1,19 @@
 function Arrays({ blogs }) {
-  // blogs = [
-  //   ...blogs,
-  //   {
-  //     id: 7,
-  //     title: "Javascript",
-  //     content: "Hello Javascript!",
-  //   },
-  // ];
-  blogs.push(
+  blogs = [
+    ...blogs,
     {
       id: 7,
       title: "Javascript",
       content: "Hello Javascript!",
-    }
-  )
+    },
+  ];
+  // blogs.push(
+  //   {
+  //     id: 7,
+  //     title: "Javascript",
+  //     content: "Hello Javascript!",
+  //   }
+  // )
   return (
     <ul>
       {blogs.map((ele) => {

@@ -1,0 +1,31 @@
+.main-box{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.container{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 190px;
+    height: 150px;
+    background-color: #eee;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: auto;
+    padding: 20px;
+    border: 2px solid green;
+}
+.change-btn{
+    position: absolute;
+    display: flex;
+    gap: 10px;
+    top: 6px;
+    right: 10px;
+    cursor: pointer;
+}
+.tag-name{
+    font-weight: bold;
+}

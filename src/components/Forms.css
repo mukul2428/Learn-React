@@ -1,0 +1,18 @@
+button{
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    font-weight:bold;
+    color: white;
+    cursor: pointer;
+    background-color: green;
+}
+input{
+    border: 2px solid green;
+    border-radius: 5px;
+    padding: 12px;
+}
+.form-container{
+    display: flex;
+    gap: 15px;
+}
