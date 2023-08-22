@@ -185,6 +185,7 @@ function App() {
       <Forms
         setStudentData={setStudentData}
         editContact={editContact}
+        setEditContact={setEditContact}
         updateStudentData={updateStudentData}
       ></Forms>
       <ShowFormData

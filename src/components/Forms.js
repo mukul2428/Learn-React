@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Forms.css";
 
-function Forms({ setStudentData, editContact, updateStudentData }) {
+function Forms({ setStudentData, editContact, setEditContact, updateStudentData }) {
   const initialState = {
     school: "XYZ Public",
     place: "Delhi",
@@ -18,9 +18,11 @@ function Forms({ setStudentData, editContact, updateStudentData }) {
     e.preventDefault(); // restrict its default behaviour
     if(editContact){
       updateStudentData(contact);
+      setEditContact(null); //setting edit usestate to its initialize state
     }else{
       setStudentData(contact);
     }
+    setContact(initialState); // set forms to its initialize state
   }
   //used for edit
   useEffect(() => {
