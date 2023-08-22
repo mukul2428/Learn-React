@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Forms.css";
 
-function Forms({ setStudentData, editContact, setEditContact, updateStudentData }) {
+function Forms({ dispatch, editContact }) {
   const initialState = {
     school: "XYZ Public",
     place: "Delhi",
@@ -17,10 +17,9 @@ function Forms({ setStudentData, editContact, setEditContact, updateStudentData 
     e.stopPropagation(); // restrict other components re-rendering
     e.preventDefault(); // restrict its default behaviour
     if(editContact){
-      updateStudentData(contact);
-      setEditContact(null); //setting edit usestate to its initialize state
+      dispatch({ type: 'UPDATE', payload: contact })
     }else{
-      setStudentData(contact);
+      dispatch({ type: 'ADD', payload: contact })
     }
     setContact(initialState); // set forms to its initialize state
   }

@@ -1,6 +1,6 @@
 import "./ShowFormData.css";
 
-function showFormData({ contact, handleEdit, handleDelete }) {
+function showFormData({ contact, handleEdit, dispatch }) {
   return (
     <div className="main-box">
       {contact.map((elem) => {
@@ -11,7 +11,7 @@ function showFormData({ contact, handleEdit, handleDelete }) {
                 🖊️
               </span>
               <span
-                onClick={() => handleDelete(elem.id)}
+                onClick={() => dispatch({ type: 'DELETE', payload: elem.id })}
                 className="delete-btn"
               >
                 🗑️
