@@ -1,13 +1,13 @@
-import { useContext } from "react";
 import "./ShowFormData.css";
-import StudentContext from "../context/StudentContext";
-import StudentDispatchContext from "../context/StudentDispatchContext";
+import useStudentDispatch from "../hooks/StudentDispatch";
+import useStudent from "../hooks/Student";
 
 function ShowFormData({ handleEdit }) {
 
-  //context use = this is global variable
-  const contact = useContext(StudentContext);
-  const dispatch = useContext(StudentDispatchContext);
+  // now we are using custom hooks instead of usecontext,
+  // custom hook is internally using useContext
+  const contact = useStudent();
+  const dispatch = useStudentDispatch();
 
   return (
     <div className="main-box">

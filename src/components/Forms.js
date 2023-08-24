@@ -1,11 +1,12 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Forms.css";
-import StudentDispatchContext from "../context/StudentDispatchContext";
+import useStudentDispatch from "../hooks/StudentDispatch";
 
 function Forms({ editContact }) {
-  
-  //context use = this is global variable
-  const dispatch = useContext(StudentDispatchContext);
+
+  // now we are using custom hooks instead of usecontext,
+  // custom hook is internally using useContext
+  const dispatch = useStudentDispatch();
 
   const initialState = {
     school: "XYZ Public",
