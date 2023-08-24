@@ -1,6 +1,14 @@
+import { useContext } from "react";
 import "./ShowFormData.css";
+import StudentContext from "../context/StudentContext";
+import StudentDispatchContext from "../context/StudentDispatchContext";
 
-function showFormData({ contact, handleEdit, dispatch }) {
+function ShowFormData({ handleEdit }) {
+
+  //context use = this is global variable
+  const contact = useContext(StudentContext);
+  const dispatch = useContext(StudentDispatchContext);
+
   return (
     <div className="main-box">
       {contact.map((elem) => {
@@ -39,4 +47,4 @@ function showFormData({ contact, handleEdit, dispatch }) {
     </div>
   );
 }
-export default showFormData;
+export default ShowFormData;

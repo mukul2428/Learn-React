@@ -1,7 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./Forms.css";
+import StudentDispatchContext from "../context/StudentDispatchContext";
 
-function Forms({ dispatch, editContact }) {
+function Forms({ editContact }) {
+  
+  //context use = this is global variable
+  const dispatch = useContext(StudentDispatchContext);
+
   const initialState = {
     school: "XYZ Public",
     place: "Delhi",
@@ -16,9 +21,9 @@ function Forms({ dispatch, editContact }) {
   function handleSubmit(e) {
     e.stopPropagation(); // restrict other components re-rendering
     e.preventDefault(); // restrict its default behaviour
-    if(editContact){
+    if (editContact) {
       dispatch({ type: 'UPDATE', payload: contact })
-    }else{
+    } else {
       dispatch({ type: 'ADD', payload: contact })
     }
     setContact(initialState); // set forms to its initialize state

@@ -2,6 +2,8 @@ import "./App.css";
 import { useReducer, useState } from "react";
 import Forms from "./components/Forms";
 import ShowFormData from "./components/ShowFormData";
+import StudentContext from "./context/StudentContext";
+import StudentDispatchContext from "./context/StudentDispatchContext";
 
 //functional components
 //this App "A" should be in capital
@@ -32,7 +34,7 @@ function App() {
   // this function is used for setting state and it returns a state
   //instead of useState we can use this
   //it acts as a listner
-  function contactReducer(contact, action) { 
+  function contactReducer(contact, action) {
     switch (action.type) {
       case 'ADD':
         return [
@@ -51,7 +53,7 @@ function App() {
         return contact; // returning default state
     }
   }
-  
+
 
   function handleEdit(id) {
     //finding id of that particular card and setting it to forms
@@ -59,17 +61,18 @@ function App() {
   }
 
   return (
-    <span className="app-container">
-      <Forms
-        dispatch={dispatch}
-        editContact={editContact}
-      ></Forms>
-      <ShowFormData
-        contact={contact}
-        handleEdit={handleEdit}
-        dispatch={dispatch}
-      ></ShowFormData>
-    </span>
+    <StudentContext.Provider value={contact}>
+      <StudentDispatchContext.Provider value={dispatch}>
+        <span className="app-container">
+          <Forms
+            editContact={editContact}
+          ></Forms>
+          <ShowFormData
+            handleEdit={handleEdit}
+          ></ShowFormData>
+        </span>
+      </StudentDispatchContext.Provider>
+    </StudentContext.Provider>
   );
 }
 
