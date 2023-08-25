@@ -13,6 +13,7 @@ import UseState from "./components/UseState";
 import Arrays from "./components/Arrays";
 import Forms from "./components/Forms";
 import ShowFormData from "./components/ShowFormData";
+import Counter from "./components/Counter";
 
 //functional components
 //this App "A" should be in capital
@@ -182,7 +183,7 @@ function App() {
       </EventHandling> */}
       {/* <UseState/> */}
       {/* <Arrays blogs={blogs}></Arrays> */}
-      <Forms
+      {/* <Forms
         setStudentData={setStudentData}
         editContact={editContact}
         setEditContact={setEditContact}
@@ -192,7 +193,8 @@ function App() {
         contact={contact}
         handleEdit={handleEdit}
         handleDelete={handleDelete}
-      ></ShowFormData>
+      ></ShowFormData> */}
+      <Counter></Counter>
     </span>
   );
 }
