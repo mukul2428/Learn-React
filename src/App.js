@@ -1,5 +1,5 @@
 import "./App.css";
-import { useReducer, useState } from "react";
+import { useCallback, useReducer, useState } from "react";
 import Forms from "./components/Forms";
 import ShowFormData from "./components/ShowFormData";
 import StudentContext from "./context/StudentContext";
@@ -39,10 +39,12 @@ function App() {
     }
   }
 
-  function handleEdit(id) {
-    //finding id of that particular card and setting it to forms
-    setEditContact(contact.find((data) => data.id === id));
-  }
+  //use memoization in handleEdit function
+  const handleEdit = useCallback(
+    function handleEdit(id) {
+      //finding id of that particular card and setting it to forms
+      setEditContact(contact.find((data) => data.id === id));
+    }, [contact])
 
   return (
     <StudentContext.Provider value={contact}>

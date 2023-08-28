@@ -2,9 +2,9 @@ import "./ShowFormData.css";
 import useStudentDispatch from "../hooks/StudentDispatch";
 import useStudent from "../hooks/Student";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, memo } from "react";
 
-function ShowFormData({ handleEdit }) {
+const student_data = memo(function ShowFormData({ handleEdit }) {
   const url = "https://my.api.mockaroo.com/student_contact.json?key=d6bb4330";
 
   // now we are using custom hooks instead of usecontext,
@@ -60,5 +60,5 @@ function ShowFormData({ handleEdit }) {
       <button onClick={callApi}>Call API</button>
     </div>
   );
-}
-export default ShowFormData;
+})
+export default student_data;
