@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, forwardRef, useImperativeHandle } from "react";
 
 // function fib(n) {
 //   if (n === 1 || n === 2) {
@@ -7,7 +7,10 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 //   return fib(n - 1) + fib(n - 2);
 // }
 
-function Counter() {
+// forwardRef hook = it passes useRef from one component to other
+// so passing ref and useRef will be used in parent component
+// note = we are not using prop but still we have to pass props for forwardRef syntax
+const Counter = forwardRef(function Counter(props,ref) {
   //state update do re-rendering
   // we use useRef hook if want any value to be recorded but to be updated on screen
   // useRef is used to access dom apis
@@ -15,6 +18,17 @@ function Counter() {
   //   let cnt = 0;
   let cnt = useRef(0);
   const inputRef = useRef(null);
+
+
+  // useImperativeHandle hook will only send selective useRef functionality to other component
+  useImperativeHandle(ref,()=>{
+    return {
+      Focus(){
+        inputRef.current.focus()
+      }
+    }
+  },[])
+
 
   //useMemo hook is used to save any value, saves calculation(caching)
   //useCallback = whole function is memoized, function which will be made using this will not
@@ -41,9 +55,9 @@ function Counter() {
     setCount(count + 1);
   };
 
-  useEffect(() => {
-    inputRef.current.focus();
-  }, []);
+  // useEffect(() => {
+  //   inputRef.current.focus();
+  // }, []);
 
   return (
     <div>
@@ -54,5 +68,5 @@ function Counter() {
       <button onClick={handleClick}>Add</button>
     </div>
   );
-}
+})
 export default Counter;

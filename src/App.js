@@ -1,6 +1,6 @@
 import "./App.css";
 import Test from "./components/Test";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Clock from "./components/clock";
 // import LoginControl from "./components/loginControl";
 import Blog from "./components/blog";
@@ -154,6 +154,9 @@ function App() {
     setContact(newContact);
   }
 
+  //using ref
+  const inputRef = useRef(null);
+
   return (
     <span className="app-container">
       {/* {callUser(userObj)}
@@ -194,7 +197,8 @@ function App() {
         handleEdit={handleEdit}
         handleDelete={handleDelete}
       ></ShowFormData> */}
-      <Counter></Counter>
+      <Counter ref={inputRef}></Counter>
+      <button onClick={()=>{inputRef.current.Focus()}}>Focus</button>
     </span>
   );
 }
