@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState, forwardRef, useImperativeHandle } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, forwardRef, useImperativeHandle, useDeferredValue, useTransition } from "react";
 
 // function fib(n) {
 //   if (n === 1 || n === 2) {
@@ -49,11 +49,21 @@ const Counter = forwardRef(function Counter(props,ref) {
     return fibMz(count);
   }, [count,fibMz]);
 
+  // useDeferedValue hook = delay state update and keep app responsive, so app don't hang, 
+  // use defered value(old value) until new cpu computation is not completed
+
+  //useTransition() is used if we know which function will be make delay
+
+  const [isPending, startTransition] = useTransition();
+
   let handleClick = () => {
     cnt.current++;
     console.log(cnt.current);
-    setCount(count + 1);
+    startTransition(()=>{
+      setCount(count + 1);
+    })
   };
+  
 
   // useEffect(() => {
   //   inputRef.current.focus();
@@ -64,7 +74,7 @@ const Counter = forwardRef(function Counter(props,ref) {
       <form action="">
         <input ref={inputRef} type="text" placeholder="Enter Name" />
       </form>
-      {count} | {fibMemorized}
+      {count} | {isPending ? 'Ruko Jara' : fibMemorized}
       <button onClick={handleClick}>Add</button>
     </div>
   );
