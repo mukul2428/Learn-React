@@ -14,6 +14,7 @@ import Arrays from "./components/Arrays";
 import Forms from "./components/Forms";
 import ShowFormData from "./components/ShowFormData";
 import Counter from "./components/Counter";
+import Fibonacci from "./components/Fibonacci";
 
 //functional components
 //this App "A" should be in capital
@@ -197,8 +198,9 @@ function App() {
         handleEdit={handleEdit}
         handleDelete={handleDelete}
       ></ShowFormData> */}
-      <Counter ref={inputRef}></Counter>
-      <button onClick={()=>{inputRef.current.Focus()}}>Focus</button>
+      {/* <Counter ref={inputRef}></Counter>
+      <button onClick={()=>{inputRef.current.Focus()}}>Focus</button> */}
+      <Fibonacci></Fibonacci>
     </span>
   );
 }
