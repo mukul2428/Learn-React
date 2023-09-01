@@ -1,7 +1,7 @@
 import "./App.css";
 import Test from "./components/Test";
-import { useRef, useState } from "react";
-import Clock from "./components/clock";
+import { Suspense, lazy, useRef, useState } from "react";
+// import Clock from "./components/clock";
 // import LoginControl from "./components/loginControl";
 import Blog from "./components/blog";
 import Form from "./components/form";
@@ -15,6 +15,8 @@ import Forms from "./components/Forms";
 import ShowFormData from "./components/ShowFormData";
 import Counter from "./components/Counter";
 import Fibonacci from "./components/Fibonacci";
+
+const Clock = lazy(() => import("./components/clock"));
 
 //functional components
 //this App "A" should be in capital
@@ -147,7 +149,7 @@ function App() {
   function updateStudentData(studentData) {
     console.log(studentData);
     //find index of data to be updated
-    const index = contact.findIndex((data)=> data.id === studentData.id);
+    const index = contact.findIndex((data) => data.id === studentData.id);
 
     const newContact = [...contact];
     // splice = remove item from that particular index and put new item
@@ -157,6 +159,8 @@ function App() {
 
   //using ref
   const inputRef = useRef(null);
+
+  const [loadClock, setLoadClock] = useState(false);
 
   return (
     <span className="app-container">
@@ -200,7 +204,12 @@ function App() {
       ></ShowFormData> */}
       {/* <Counter ref={inputRef}></Counter>
       <button onClick={()=>{inputRef.current.Focus()}}>Focus</button> */}
-      <Fibonacci></Fibonacci>
+      {/* <Fibonacci></Fibonacci> */}
+      <button onClick={() => setLoadClock(true)}>Load Clock</button>
+      {loadClock ?
+        <Suspense fallback={<>Loading Clock...</>}>
+          <Clock />
+        </Suspense> : null}
     </span>
   );
 }
